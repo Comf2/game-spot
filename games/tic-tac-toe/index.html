@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link
+      rel="stylesheet"
+      href="./css/reset.css"
+    />
+    <link
+      rel="stylesheet"
+      href="./css/style.css"
+    />
+    <script
+      src="./js/start.js"
+      defer
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/3040f9f00d.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="start-game-container">
+      <header class="sym-container">
+        <i class="fa-solid fa-x"></i>
+        <i class="fa-solid fa-o"></i>
+      </header>
+      <main class="pick-sym-container">
+        <h3 class="tie-color">PICK PLAYER 1S MARK</h3>
+        <div class="pick-sym-slider">
+          <button id="x-sym">
+            <i class="fa-solid fa-x"></i>
+          </button>
+          <button id="o-sym">
+            <i class="fa-solid fa-o"></i>
+          </button>
+        </div>
+        <p class="secondary-text">REMEMBER, X GOES FIRST</p>
+      </main>
+      <footer class="start-bottom">
+        <div class="main-button new-game-cpu">NEW GAME (VS CPU)</div>
+        <div class="main-button new-game-player">NEW GAME (VS PLAYER)</div>
+      </footer>
+    </div>
+    <div class="bot-difficulty-container">
+      <p>DIFFICULTY</p>
+      <div class="difficulty-box">
+        <button class="main-button">Easy</button>
+        <button class="main-button o-background">Medium</button>
+        <button class="main-button x-background">Hard</button>
+      </div>
+    </div>
+  </body>
+</html>
