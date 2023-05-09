@@ -18,19 +18,59 @@
       rel="stylesheet"
       href="../../assets/css/index.css"
     />
+    <script
+      src="./js/main.js"
+      defer
+    ></script>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../../assets/svg/x-icon.svg"
+    />
+    <script
+      src="https://kit.fontawesome.com/c503d7f164.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Rock Paper Scissors</title>
   </head>
   <body>
+    <div class="tooltip">Rock</div>
     <h1 class="index-title">
       rock <span class="x-color">paper</span>
       <span class="o-color">scissors</span>
     </h1>
     <div class="rps-win-animation-container">
       <div class="rps-score">
-        <h2>0</h2>
-        <h2>0</h2>
+        <h2
+          class="x-color"
+          title="win"
+        >
+          0
+        </h2>
+        <h2
+          class="tie-color"
+          title="tie"
+        >
+          0
+        </h2>
+        <h2
+          class="o-color"
+          title="loss"
+        >
+          0
+        </h2>
       </div>
     </div>
-    <div class="rps-selection-container">.</div>
+    <div class="rps-selection-container">
+      <button class="tie-color">
+        <i class="fa-solid fa-hand-back-fist"></i>
+      </button>
+      <button class="x-color">
+        <i class="fa-solid fa-hand"></i>
+      </button>
+      <button class="o-color">
+        <i class="fa-solid fa-hand-scissors"></i>
+      </button>
+    </div>
   </body>
 </html>
