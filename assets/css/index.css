@@ -63,6 +63,7 @@ body {
 }
 .index-title {
   font-size: 5em;
+  text-transform: capitalize;
 }
 .selection-container {
   display: flex;
