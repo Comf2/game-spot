@@ -67,6 +67,3 @@ function updateScore() {
     scoreEles[i].innerHTML = scores[i];
   }
 }
-function playWinAnimation(selection, botSelection) {}
-function playTieAnimation(selection, botSelection) {}
-function playLoseAnimation(selection, botSelection) {}
