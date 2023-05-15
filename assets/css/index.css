@@ -123,10 +123,15 @@ body {
   height: 20vh;
   background-color: var(--dark-400);
   border-radius: 8px;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  place-items: center;
   border-bottom: 6px solid var(--dark-600);
 
+}
+.win-video {
+  background-color: red !important;
+  height: 100%;
+  grid
 }
 .rps-score {
   display: flex;
