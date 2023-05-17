@@ -24,13 +24,16 @@ function removeToolTip() {
   toolTip.style.display = 'none';
 }
 
+const winnerText = document.getElementById('winner-text');
+
 let animationPlaying = false;
 let playerScore = 0;
 let botScore = 0;
 let tieScore = 0;
 function checkWin(selection) {
-  // if (animationPlaying) return;
-  //^^^^^ this if will exist when animation added
+  if (animationPlaying) return;
+  winnerText.innerText = '';
+  winnerText.classList.remove('winning-text');
   let winner = '';
   animationPlaying = true;
   const botSelection = getBotSelection();
@@ -80,6 +83,7 @@ const animationSources = [
 ];
 const winVidEle = document.querySelector('.win-video');
 function playWinAnimation(player1, player2, winner) {
+  animationPlaying = true;
   let animI;
   if (
     (player1 === 'rock' && player2 === 'paper') ||
@@ -116,8 +120,8 @@ function playWinAnimation(player1, player2, winner) {
     //update bool and add condition
     //
     winVidEle.style.opacity = '0';
-    const winnerText = document.getElementById('winner-text');
     winnerText.innerText = winner;
     winnerText.classList.add('winning-text');
+    setTimeout(() => (animationPlaying = false), 500);
   }, animationSources[animI].length);
 }

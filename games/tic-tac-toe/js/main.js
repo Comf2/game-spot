@@ -8,7 +8,6 @@ let spaces = [
     6, 7, 8
 ];
 let curTurn = 'x';
-//TODO: make the start page index.html for hosting purposes later
 let playerOneSym = `<i class="fa-solid fa-x x-color"></i>`;
 let playerTwoSym = `	<i class="fa-solid fa-o o-color"></i>`;
 let tieSym = `	<i class="fa-solid fa-minus tie-color"></i>`;
@@ -20,10 +19,13 @@ let gamePlaying = true;
 
 let gameConfig = JSON.parse(localStorage.getItem('gameConfig'));
 
+const currentScoreEle = document.querySelectorAll('.current-score');
+
 console.log('game Config >>', gameConfig);
 //pOne wins ties, pTwo Wins
-let scores = [0, 0, 0];
-
+let scores = JSON.parse(window.localStorage.getItem('scores'));
+if (scores === null) scores = [0, 0, 0];
+updateScore(scores);
 //front end eles changing
 const turnContainer = document.querySelector('.turn-container');
 
@@ -48,13 +50,14 @@ function initCpu() {
   if (!gamePlaying) return;
   let space;
   if (gameConfig.difficulty === 0) space = getRandomInt(0, 8);
-  else if (gameConfig.difficulty === 2) space = getHardSpace();
+  else if (gameConfig.difficulty === 1) space = getHardSpace();
   if (spaceIsEmpty(space) == false) {
     initCpu();
     return;
   }
   if (spaceIsEmpty(space)) {
     setTimeout(function () {
+      console.log(space);
       spaceEles[space].innerHTML = playerTwoSym;
       spaces[space] = gameConfig.pTwoTeam;
 
@@ -97,6 +100,7 @@ function getHardSpace() {
 //array, int, bool
 
 function miniMax(spaces, depth, isMaximising) {
+  let bestScore;
   if (winning(gameConfig.pTwoTeam)) return 10;
   else if (winning(gameConfig.pOneTeam)) return -10;
   else if (allSpacesTaken()) return 0;
@@ -105,7 +109,7 @@ function miniMax(spaces, depth, isMaximising) {
     return 0;
   }
   if (isMaximising) {
-    let bestScore = -Infinity;
+    bestScore = -Infinity;
 
     for (let i = 0; i < spaces.length; i++) {
       if (spaceIsEmpty(spaces[i])) {
@@ -117,7 +121,7 @@ function miniMax(spaces, depth, isMaximising) {
     }
     return bestScore;
   } else {
-    let bestScore = Infinity;
+    bestScore = Infinity;
     for (let i = 0; i < spaces.length; i++) {
       if (spaceIsEmpty(spaces[i])) {
         spaces[i] = gameConfig.pOneTeam;
@@ -126,8 +130,8 @@ function miniMax(spaces, depth, isMaximising) {
         bestScore = Math.min(score, bestScore);
       }
     }
-    return bestScore;
   }
+  return bestScore;
 }
 
 for (let i = 0; i < spaceEles.length; i++) {
@@ -275,10 +279,9 @@ function initWinScreen(winnerSym, team) {
     updateScore(scores);
     return;
   }
-  team == gameConfig.pOneTeam ? scores[0]++ : scores[2]++;
+  team = gameConfig.pOneTeam ? scores[0]++ : scores[2]++;
   updateScore(scores);
 }
-const currentScoreEle = document.querySelectorAll('.current-score');
 function initScore() {
   const scoreContainer = document.querySelectorAll('.score-container');
   const teamEle = document.querySelectorAll('.score-container > p');
@@ -329,10 +332,12 @@ const nextRoundButton = document.querySelector('.next-round-button');
 nextRoundButton.onclick = () => startNextRound();
 
 function startNextRound() {
-  clearGame();
-  winContainer.style.display = 'none';
-  initConfig();
-  gamePlaying = true;
+  // clearGame();
+  // winContainer.style.display = 'none';
+  // initConfig();
+  // gamePlaying = true;
+  window.localStorage.setItem('scores', JSON.stringify(scores));
+  window.location.reload();
 }
 
 // quiting the game
