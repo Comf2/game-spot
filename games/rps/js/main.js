@@ -9,6 +9,15 @@ for (let i = 0; i < selectionButtons.length; i++) {
 
   button.onclick = () => checkWin(selectionOptions[i]);
 }
+
+const scoreEles = document.querySelectorAll('.rps-score h2');
+const scoreboardoptions = ['Player 1', 'Tie', 'Player 2'];
+for (let i = 0; i < scoreEles.length; i++) {
+  const scoreEle = scoreEles[i];
+  scoreEle.onmouseenter = () => addToolTip(scoreEle, scoreboardoptions[i]);
+  scoreEle.onmouseleave = () => removeToolTip();
+}
+
 const toolTip = document.querySelector('.tooltip');
 function addToolTip(ele, msg) {
   toolTip.innerHTML = msg;
@@ -37,8 +46,6 @@ function checkWin(selection) {
   let winner = '';
   animationPlaying = true;
   const botSelection = getBotSelection();
-  console.log('bot >>>', botSelection);
-  console.log('player >>>', selection);
   if (selection === botSelection) {
     winner = 'Its a Tie!';
     tieScore++;
@@ -122,6 +129,35 @@ function playWinAnimation(player1, player2, winner) {
     winVidEle.style.opacity = '0';
     winnerText.innerText = winner;
     winnerText.classList.add('winning-text');
-    setTimeout(() => (animationPlaying = false), 500);
+
+    setTimeout(() => {
+      animationPlaying = false;
+      if (playerScore < 3 && botScore < 3) return;
+      animationPlaying = true;
+
+      initEndGame(winner);
+    }, 500);
   }, animationSources[animI].length);
+}
+
+const endGameContainer = document.querySelector('.end-game-container');
+function initEndGame(winner) {
+  endGameContainer.style.display = 'flex';
+  const endGameText = document.querySelector('.end-game-container h2');
+  endGameText.innerHTML = winner;
+}
+const endGameBtn = document.querySelector('.quit-button');
+const nextRoundButton = document.querySelector('.next-round-button');
+
+endGameBtn.onclick = () => (window.location = '../../index.html');
+nextRoundButton.onclick = () => startNextRound();
+function startNextRound() {
+  animationPlaying = false;
+  endGameContainer.style.display = 'none';
+  //reset score
+  playerScore = 0;
+  botScore = 0;
+  tieScore = 0;
+
+  updateScore();
 }

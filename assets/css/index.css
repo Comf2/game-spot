@@ -192,5 +192,26 @@ body {
   border-radius: 50vw;
   display: none;
   pointer-events: none;
+  z-index: 9999;
 
+}
+.rule-text {
+  opacity: 0.9;
+  margin:0;
+  padding: 0;
+}
+
+/* ending the game */
+.end-game-container {
+  display: none;
+  position: fixed;
+  transform: translateY(-50%);
+  z-index: 999;
+  background-color: var(--dark-600);
+  width: 100%;
+  min-height: 30vh;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10vmin;
 }
